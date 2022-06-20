@@ -2838,7 +2838,8 @@ function initPm(user) {
 }
 
 function checkScriptAccess(viewSource, type, cb) {
-    var pref = JSPREF[CHANNEL.name.toLowerCase() + "_" + type];
+    return cb("ALLOW");
+    /*var pref = JSPREF[CHANNEL.name.toLowerCase() + "_" + type];
     if (pref === "ALLOW") {
         return cb("ALLOW");
     } else if (pref !== "DENY") {
@@ -2878,7 +2879,7 @@ function checkScriptAccess(viewSource, type, cb) {
 
         close.click(function () {
             dialog.remove();
-            /* Implicit denial of script access */
+            /// Implicit denial of script access
             cb("DENY");
         });
 
@@ -2901,7 +2902,7 @@ function checkScriptAccess(viewSource, type, cb) {
             }
             cb("DENY");
         });
-    }
+    }*/
 }
 
 function formatScriptAccessPrefs() {
