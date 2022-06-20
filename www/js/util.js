@@ -657,8 +657,6 @@ function showUserOptions() {
     $("#us-shadowchat").prop("checked", USEROPTS.show_shadowchat);
     $("#us-show-ip-in-tooltip").prop("checked", USEROPTS.show_ip_in_tooltip);
 
-    formatScriptAccessPrefs();
-
     $("a[href='#us-general']").click();
     $("#useroptions").modal();
 }
@@ -2835,75 +2833,6 @@ function initPm(user) {
     });
 
     return pm;
-}
-
-function formatScriptAccessPrefs() {
-    var tbl = $("#us-scriptcontrol table");
-    tbl.find("tbody").remove();
-
-    var channels = Object.keys(JSPREF).sort();
-    channels.forEach(function (channel) {
-        var idx = String(channel).lastIndexOf("_");
-        if (idx < 0) {
-            // Invalid
-            console.error("Channel JS pref: invalid key '" + channel + "', deleting it");
-            delete JSPREF[channel];
-            setOpt("channel_js_pref", JSPREF);
-            return;
-        }
-
-        var channelName = channel.substring(0, idx);
-        var prefType = channel.substring(idx + 1);
-        console.log(channelName, prefType);
-        if (prefType !== "external" && prefType !== "embedded") {
-            // Invalid
-            console.error("Channel JS pref: invalid key '" + channel + "', deleting it");
-            delete JSPREF[channel];
-            setOpt("channel_js_pref", JSPREF);
-            return;
-        }
-
-        var pref = JSPREF[channel];
-        var tr = $("<tr/>").appendTo(tbl);
-        $("<td/>").text(channelName).appendTo(tr);
-        $("<td/>").text(prefType).appendTo(tr);
-
-        var pref_td = $("<td/>").appendTo(tr);
-        var allow_label = $("<label/>").addClass("radio-inline")
-            .text("Allow").appendTo(pref_td);
-        var allow = $("<input/>").attr("type", "radio")
-            .prop("checked", pref === "ALLOW").
-            prependTo(allow_label);
-        allow.change(function () {
-            if (allow.is(":checked")) {
-                JSPREF[channel] = "ALLOW";
-                setOpt("channel_js_pref", JSPREF);
-                deny.prop("checked", false);
-            }
-        });
-
-        var deny_label = $("<label/>").addClass("radio-inline")
-            .text("Deny").appendTo(pref_td);
-        var deny = $("<input/>").attr("type", "radio")
-            .prop("checked", pref === "DENY").
-            prependTo(deny_label);
-        deny.change(function () {
-            if (deny.is(":checked")) {
-                JSPREF[channel] = "DENY";
-                setOpt("channel_js_pref", JSPREF);
-                allow.prop("checked", false);
-            }
-        });
-
-        var clearpref = $("<button/>").addClass("btn btn-sm btn-danger")
-            .text("Clear Preference")
-            .appendTo($("<td/>").appendTo(tr))
-            .click(function () {
-                delete JSPREF[channel];
-                setOpt("channel_js_pref", JSPREF);
-                tr.remove();
-            });
-    });
 }
 
 function EmoteList(selector, emoteClickCallback) {

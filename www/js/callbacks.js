@@ -329,7 +329,6 @@ Callbacks = {
                         dismissText: "Close"
                     });
                 };
-                
                 $("<script/>").attr("type", "text/javascript")
                     .attr("id", "chanjs")
                     .text(data.js)

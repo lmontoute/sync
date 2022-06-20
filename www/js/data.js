@@ -182,18 +182,6 @@ var VOLUME = parseFloat(getOrDefault("volume", 1));
 var NO_WEBSOCKETS = USEROPTS.altsocket;
 var NO_VIMEO = Boolean(location.host.match("cytu.be"));
 
-var JSPREF = getOpt("channel_js_pref") || {};
-// Dunno why this happens
-if (typeof JSPREF !== "object" || JSPREF === null) {
-    try {
-        JSPREF = JSON.parse(JSPREF);
-    } catch (e) {
-        console.error("JSPREF is bugged: " + e + " (" + JSPREF + ")");
-        JSPREF = {};
-        setOpt("channel_js_pref", JSPREF);
-    }
-}
-
 var Rank = {
     Guest: 0,
     Member: 1,
