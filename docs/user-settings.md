@@ -10,8 +10,6 @@ Setting | Description
 --------|------------
 Theme | Choose from different colorschemes for the website.
 Layout | Choose from different layouts for elements on the page.  Fluid layouts will expand to fill the entire window, while compact layouts will remain the same size.  "Synchtube" layout is the same as the default layout, but mirrored.
-Ignore Channel CSS | Don't load custom stylesheets for each channel.  Requires a refresh to take effect.
-Ignore Channel JavaScript | Don't load custom scripts for each channel.
 
 ## Playback ##
 

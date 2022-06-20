@@ -631,8 +631,6 @@ function showUserOptions() {
 
     $("#us-theme").val(USEROPTS.theme);
     $("#us-layout").val(USEROPTS.layout);
-    $("#us-no-channelcss").prop("checked", USEROPTS.ignore_channelcss);
-    $("#us-no-channeljs").prop("checked", USEROPTS.ignore_channeljs);
 
     $("#us-synch").prop("checked", USEROPTS.synch);
     $("#us-synch-accuracy").val(USEROPTS.sync_accuracy);
