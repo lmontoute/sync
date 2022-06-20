@@ -85,10 +85,10 @@ var defaults = {
     "aggressive-gc": false,
     playlist: {
         "max-items": 4000,
-        "update-interval": 5
+        "update-interval": 1
     },
     ffmpeg: {
-        enabled: false,
+        enabled: true,
         "ffprobe-exec": "ffprobe"
     },
     "link-domain-blacklist": [],
