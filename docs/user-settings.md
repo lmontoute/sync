@@ -11,7 +11,7 @@ Setting | Description
 Theme | Choose from different colorschemes for the website.
 Layout | Choose from different layouts for elements on the page.  Fluid layouts will expand to fill the entire window, while compact layouts will remain the same size.  "Synchtube" layout is the same as the default layout, but mirrored.
 Ignore Channel CSS | Don't load custom stylesheets for each channel.  Requires a refresh to take effect.
-Ignore Channel JavaScript | Don't load custom scripts for each channel.  The Script Access tab allows you to manage your preferences on a per-channel basis, but if this setting is checked, scripts will be globally disallowed and you will not be prompted to accept them when joining a channel.
+Ignore Channel JavaScript | Don't load custom scripts for each channel.
 
 ## Playback ##
 
@@ -40,10 +40,6 @@ Blink page title on new messages | Controls the conditions under which the tab t
 Notification sound on new messages | Controls the conditions under which a notification sound is played when a new message arrives.
 Add a send button to chat | Adds a clickable button to send chat messages.  Only really useful for virtual keyboards that lack a dedicated Enter key.
 Disable chat emotes | Disables the automatic conversion of channel-defined emote codes to inline images.
-
-## Script Access ##
-
-Manage your preferences for allowing or denying custom scripts for channels you've visited.  A channel will only appear here if you checked "Remember my preference" when allowing or denying a channel script.  You can toggle the preference between "Allow" and "Deny", or click "Clear Preference" to remove the saved preference, so that you will be asked every time you join the channel.
 
 ## Moderator ##
 
