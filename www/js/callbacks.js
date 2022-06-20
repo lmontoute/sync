@@ -307,7 +307,7 @@ Callbacks = {
             $("#chancss").remove();
             CHANNEL.css = data.css;
             $("#cs-csstext").val(data.css);
-            if(data.css && !USEROPTS.ignore_channelcss) {
+            if(data.css) {
                 $("<style/>").attr("type", "text/css")
                     .attr("id", "chancss")
                     .text(data.css)
@@ -327,7 +327,7 @@ Callbacks = {
             CHANNEL.js = data.js;
             $("#cs-jstext").val(data.js);
 
-            if(data.js && !USEROPTS.ignore_channeljs) {
+            if(data.js) {
                 var viewSource = document.createElement("button");
                 viewSource.className = "btn btn-danger";
                 viewSource.textContent = "View inline script source";
@@ -340,7 +340,7 @@ Callbacks = {
                         dismissText: "Close"
                     });
                 };
-
+                
                 checkScriptAccess(viewSource, "embedded", function (pref) {
                     if (pref === "ALLOW") {
                         $("<script/>").attr("type", "text/javascript")
