@@ -273,18 +273,7 @@ Callbacks = {
 
         if(opts.externaljs.trim() != "" && !USEROPTS.ignore_channeljs &&
            opts.externaljs !== CHANNEL.opts.externaljs) {
-            var viewSource = document.createElement("a");
-            viewSource.className = "btn btn-danger";
-            viewSource.setAttribute("role", "button");
-            viewSource.setAttribute("target", "_blank");
-            viewSource.setAttribute("rel", "noopener noreferer");
-            viewSource.textContent = "View external script source";
-            viewSource.href = opts.externaljs;
-            checkScriptAccess(viewSource, "external", function (pref) {
-                if (pref === "ALLOW") {
-                    $.getScript(opts.externaljs);
-                }
-            });
+            $.getScript(opts.externaljs);
         }
 
         CHANNEL.opts = opts;
@@ -341,14 +330,10 @@ Callbacks = {
                     });
                 };
                 
-                checkScriptAccess(viewSource, "embedded", function (pref) {
-                    if (pref === "ALLOW") {
-                        $("<script/>").attr("type", "text/javascript")
-                            .attr("id", "chanjs")
-                            .text(data.js)
-                            .appendTo($("body"));
-                    }
-                });
+                $("<script/>").attr("type", "text/javascript")
+                    .attr("id", "chanjs")
+                    .text(data.js)
+                    .appendTo($("body"));
             }
 
             if (data.jsHash) {
