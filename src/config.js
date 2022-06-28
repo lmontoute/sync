@@ -89,7 +89,7 @@ var defaults = {
     "aggressive-gc": false,
     playlist: {
         "max-items": 4000,
-        "update-interval": 1
+        "update-interval": 5
     },
     ffmpeg: {
         enabled: true,
