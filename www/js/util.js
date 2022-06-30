@@ -655,7 +655,7 @@ function showUserOptions() {
     $("#us-shadowchat").prop("checked", USEROPTS.show_shadowchat);
     $("#us-show-ip-in-tooltip").prop("checked", USEROPTS.show_ip_in_tooltip);
 
-    $("a[href='#us-general']").click();
+    $("a[href='#us-chat']").click();
     $("#useroptions").modal();
 }
 
