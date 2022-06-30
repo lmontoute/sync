@@ -16,10 +16,8 @@ mixin navdefaultlinks()
       if loggedIn
         li: a(href="javascript:$('#logoutform').submit();") Log out
         li.divider
-        li: a(href="/account/channels") Channels
         li: a(href="/account/profile") Profile
         li: a(href="/account/edit") Change Password/Email
-        li: a(href="/account/delete") Delete Account
       else
         li: a(href="/login") Login
         li: a(href="/register") Register
