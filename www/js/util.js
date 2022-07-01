@@ -578,20 +578,6 @@ function addQueueButtons(li) {
         menu.find(".qbtn-play").addClass("btn-success");
         menu.find(".qbtn-delete").addClass("btn-danger");
     }
-    else if(menu.find(".btn").length != 0) {
-        li.unbind("contextmenu");
-        li.contextmenu(function(ev) {
-            // Allow shift+click to open context menu
-            // (Chrome workaround, works by default on Firefox)
-            if (ev.shiftKey) return true;
-            ev.preventDefault();
-            if(menu.css("display") == "none")
-                menu.show("blind");
-            else
-                menu.hide("blind");
-            return false;
-        });
-    }
 }
 
 function rebuildPlaylist() {
@@ -656,7 +642,6 @@ function showUserOptions() {
     $("#us-show-ip-in-tooltip").prop("checked", USEROPTS.show_ip_in_tooltip);
 
     $("a[href='#us-chat']").click();
-    $("#useroptions").modal();
 }
 
 function saveUserOptions() {
@@ -1009,37 +994,7 @@ function handlePermissionChange() {
     setVisible("#showplaylistmanager", hasPermission("seeplaylist"));
     setVisible("#showmediaurl", hasPermission("playlistadd"));
     setVisible("#showcustomembed", hasPermission("playlistaddcustom"));
-    $("#queue_next").attr("disabled", !hasPermission("playlistnext"));
-
-    if(hasPermission("playlistadd") ||
-        hasPermission("playlistmove") ||
-        hasPermission("playlistjump") ||
-        hasPermission("playlistdelete") ||
-        hasPermission("settemp")) {
-        if(USEROPTS.first_visit && $("#plonotification").length == 0) {
-            var al = makeAlert("Playlist Options", [
-                "From the Options menu, you can choose to automatically",
-                " hide the buttons on each entry (and show them when",
-                " you right click).  You can also choose to use the old",
-                " style of playlist buttons.",
-                "<br>"].join(""))
-                .attr("id", "plonotification")
-                .insertAfter($("#queuefail"));
-
-            al.find(".close").remove();
-
-            $("<button/>").addClass("btn btn-primary")
-                .text("Dismiss")
-                .appendTo(al.find(".alert"))
-                .click(function() {
-                    USEROPTS.first_visit = false;
-                    storeOpts();
-                    al.hide("fade", function() {
-                        al.remove();
-                    });
-                });
-        }
-    }
+    $("#queue_next").attr("disabled", !hasPermission("playlistnext"));    
 
     if(hasPermission("playlistmove")) {
         $("#queue").sortable("enable");
@@ -1542,22 +1497,24 @@ function formatChatMessage(data, last) {
         data.meta.addClass = "";
     }
 
-    // Add timestamps (unless disabled)
-    if (USEROPTS.show_timestamps) {
-        var time = $("<span/>").addClass("timestamp").appendTo(div);
-        var timestamp = new Date(data.time).toTimeString().split(" ")[0];
-        time.text("["+timestamp+"] ");
-        if (data.meta.addClass && data.meta.addClassToNameAndTimestamp) {
-            time.addClass(data.meta.addClass);
-        }
-    }
+    // Add timestamps
+    var timestamp = new Date(data.time);
+
+    var dateString = timestamp
+        .toLocaleDateString(
+            undefined, 
+            { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+
+    var timeString = timestamp.toLocaleTimeString();
+
+    div.prop("title", dateString + " " + timeString); 
 
     // Add username
     var name = $("<span/>");
-    if (!skip) {
-        name.appendTo(div);
-    }
+    name.appendTo(div);
+    
     $("<strong/>").addClass("username").text(data.username + ": ").appendTo(name);
+
     if (data.meta.modflair) {
         name.addClass(getNameColor(data.meta.modflair));
     }

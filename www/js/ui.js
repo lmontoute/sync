@@ -60,7 +60,7 @@ $("#usercount").mouseenter(function (ev) {
     var popup = $("<div/>")
         .addClass("profile-box")
         .css("top", (ev.clientY + 5) + "px")
-        .css("left", (ev.clientX) + "px")
+        .css("right", (window.innerWidth - ev.clientX) + "px")
         .appendTo($("#usercount"));
 
     var contents = "";
@@ -78,7 +78,7 @@ $("#usercount").mousemove(function (ev) {
         return;
 
     popup.css("top", (ev.clientY + 5) + "px");
-    popup.css("left", (ev.clientX) + "px");
+    popup.css("right", (window.innerWidth - ev.clientX) + "px");
 });
 
 $("#usercount").mouseleave(function () {
@@ -922,19 +922,3 @@ $("#cs-csstext").bind("input", handleCSSJSTooLarge.bind($("#cs-csstext")[0],
         "#cs-csstext-too-big"));
 $("#cs-jstext").bind("input", handleCSSJSTooLarge.bind($("#cs-jstext")[0],
         "#cs-jstext-too-big"));
-
-$("#resize-video-larger").click(function () {
-    try {
-        CyTube.ui.changeVideoWidth(1);
-    } catch (error) {
-        console.error(error);
-    }
-});
-
-$("#resize-video-smaller").click(function () {
-    try {
-        CyTube.ui.changeVideoWidth(-1);
-    } catch (error) {
-        console.error(error);
-    }
-});

@@ -451,17 +451,6 @@ li.ui-sortable-placeholder+li.queue_entry {
     margin-right: 10px;
 }
 
-#useroptions .modal-header {
-    border-bottom: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
-}
-
-#useroptions .modal-body {
-    padding-top: 0;
-    margin-top: 0;
-}
-
 .qfalert {
     margin-bottom: 10px;
     padding-left: 0 !important;
@@ -727,16 +716,6 @@ input#logout[type="submit"]:hover {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
-}
-
-#resize-video-larger,
-#resize-video-smaller {
-    float: right;
-}
-
-body.hd #resize-video-larger,
-body.hd #resize-video-smaller {
-    display: none;
 }
 
 .userlist-ignored {

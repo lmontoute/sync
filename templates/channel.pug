@@ -4,6 +4,7 @@ html(lang="en")
     include head
     +head()
     link(href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css", rel="stylesheet")
+    link(href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet")
     link(rel="stylesheet", href="/css/video-js.css")
     link(rel="stylesheet", href="/css/videojs-resolution-switcher.css")
   body
@@ -14,7 +15,6 @@ html(lang="en")
         #nav-collapsible.collapse.navbar-collapse
           ul.nav.navbar-nav
             +navdefaultlinks()
-            li: a(href="javascript:void(0)", onclick="javascript:showUserOptions()") Options
             li: a#showchansettings(href="javascript:void(0)", onclick="javascript:showChannelSettings()") Channel Settings            
             +navsuperadmin(true)
           +navloginlogout()
@@ -24,8 +24,8 @@ html(lang="en")
             .col-lg-12.col-md-12
               #motdwrap.well
                 button#togglemotd.close.pull-right(type="button")
-                  span.glyphicon.glyphicon-minus
-                #motd
+                  span.glyphicon.glyphicon-plus
+                #motd(style="display: none")
                 .clear
           #announcements.row
           #drinkbarwrap.row
@@ -34,27 +34,27 @@ html(lang="en")
           #main.row
             #chatwrap.col-lg-5.col-md-5
               #chatheader
-                i#userlisttoggle.glyphicon.glyphicon-chevron-down.pull-left.pointer(title="Show/Hide Userlist")
+                i#userlisttoggle.glyphicon.glyphicon-chevron-right.pull-left.pointer(title="Show/Hide Userlist")
                 span#usercount.pointer Not Connected
                 span#modflair.label.label-default.pull-right.pointer Name Color
-              #userlist
+              #userlist(style="display: none")
               #messagebuffer.linewrap
               form(action="javascript:void(0)")
-                input#chatline.form-control(type="text", maxlength="320", style="display: none")
+                input#chatline.form-control(type="text", autocomplete="off", maxlength="320", style="display: none")
                 #guestlogin.input-group
                   span.input-group-addon Guest login
-                  input#guestname.form-control(type="text", placeholder="Name")
+                  input#guestname.form-control(type="text", autocomplete="off", placeholder="Name")
             #videowrap.col-lg-7.col-md-7
               p#videowrap-header
-                span#resize-video-smaller.glyphicon.glyphicon-minus.pointer(title="Make the video smaller")
-                span#resize-video-larger.glyphicon.glyphicon-plus.pointer(title="Make the video larger")
                 span#currenttitle Nothing Playing
               .embed-responsive.embed-responsive-16by9
                 #ytapiplayer.embed-responsive-item
           #controlsrow.row
             #leftcontrols.col-lg-5.col-md-5
-              button#newpollbtn.btn.btn-sm.btn-default New Poll
-              button#emotelistbtn.btn.btn-sm.btn-default Emote List
+              button#newpollbtn.btn.btn-sm.btn-default(title="New poll")
+                span.fa.fa-bar-chart
+              button#emotelistbtn.btn.btn-sm.btn-default(title="Emote list")
+                span.fa.fa-smile-o
             #rightcontrols.col-lg-7.col-md-7
               #plcontrol.btn-group
                 button#showsearch.btn.btn-sm.btn-default(title="Search for a video", data-toggle="collapse", data-target="#searchcontrol")
@@ -84,7 +84,6 @@ html(lang="en")
           #playlistrow.row
             #leftpane.col-lg-5.col-md-5
               #leftpane-inner.row
-                #pollwrap.col-lg-12.col-md-12
                 #playlistmanagerwrap.col-lg-12.col-md-12
             #rightpane.col-lg-7.col-md-7
               #rightpane-inner.row
@@ -150,25 +149,9 @@ html(lang="en")
           #resizewrap.row
             .col-lg-5.col-md-5
             #videowidth.col-lg-7.col-md-7
+          #pollwrap
           #sitefooter
             include pagefooter
-    #useroptions.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button.close(data-dismiss="modal", aria-hidden="true") &times;
-            h4 User Preferences
-            ul.nav.nav-tabs
-              li: a(href="#us-chat", data-toggle="tab") Chat
-              li: a(href="#us-mod", data-toggle="tab", style="") Moderator
-          .modal-body
-            .tab-content
-              include useroptions
-              +us-chat()
-              +us-mod()
-          .modal-footer
-            button.btn.btn-primary(type="button", data-dismiss="modal", onclick="javascript:saveUserOptions()") Save
-            button.btn.btn-default(type="button", data-dismiss="modal") Close
     #emotelist.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
       .modal-dialog.modal-dialog-nonfluid
         .modal-content
